@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momento | Your Digital Sanctuary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --charcoal: #1e1e2e;
+            --deep-purple: #2a263f;
+            --midnight-blue: #1a2035;
+            --lavender: #a78bfa;
+            --peach: #f9a8d4;
+            --cyan: #67e8f9;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f17;
+            color: #e2e8f0;
+        }
+        
+        .glass-card {
+            background: rgba(30, 30, 46, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .mood-happy { background: linear-gradient(135deg, #a78bfa, #f9a8d4); }
+        .mood-calm { background: linear-gradient(135deg, #67e8f9, #818cf8); }
+        .mood-neutral { background: linear-gradient(135deg, #94a3b8, #64748b); }
+        .mood-sad { background: linear-gradient(135deg, #475569, #334155); }
+        .mood-angry { background: linear-gradient(135deg, #f87171, #ef4444); }
+        
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+        }
+        
+        .entry-block {
+            transition: all 0.2s ease;
+        }
+        
+        .entry-block:hover {
+            background: rgba(42, 38, 63, 0.5);
+        }
+        
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--lavender);
+        }
+        
+        .timeline-line {
+            width: 2px;
+            background: linear-gradient(to bottom, var(--lavender), transparent);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 30, 46, 0.3);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--lavender);
+            border-radius: 3px;
+        }
+        
+        /* Animation classes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .transition-slow {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex flex-col w-64 glass-card border-r border-gray-800 p-4 space-y-6">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <i data-lucide="pen-line" class="w-4 h-4 text-white"></i>
+                </div>
+                <h1 class="text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Momento</h1>
+            </div>
+            
+            <div class="flex-1 space-y-4">
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg bg-purple-900/30 text-purple-100 glow-effect">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>Dashboard</span>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                    <i data-lucide="calendar-days" class="w-5 h-5"></i>
+                    <span>Calendar</span>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                    <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+                    <span>Mood Tracker</span>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                    <span>Journal</span>
+                </button>
+                
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                    <i data-lucide="timeline" class="w-5 h-5"></i>
+                    <span>Timeline</span>
+                </button>
+            </div>
+            <!-- here is some code -->
+            <div class="space-y-2">
+                <div class="flex items-center justify-between text-sm text-gray-400">
+                    <span>Quick Notes</span>
+                    <button class="p-1 rounded-full hover:bg-gray-800">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="space-y-1">
+                    <button class="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-gray-800/50 transition-slow truncate">Meeting notes with team</button>
+                    <button class="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-gray-800/50 transition-slow truncate">Book recommendations</button>
+                    <button class="w-full text-left px-3 py-2 text-sm rounded-lg hover:bg-gray-800/50 transition-slow truncate">Weekly reflections</button>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-800/50 transition-slow cursor-pointer">
+                <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">Alex Johnson</p>
+                    <p class="text-xs text-gray-400">Free Plan</p>
+                </div>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- Mobile sidebar toggle -->
+        <div class="md:hidden fixed bottom-4 right-4 z-10">
+            <button id="mobileMenuButton" class="w-12 h-12 rounded-full bg-purple-900/80 backdrop-blur flex items-center justify-center glow-effect floating">
+                <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile sidebar -->
+        <div id="mobileSidebar" class="fixed inset-0 z-20 bg-black/80 backdrop-blur hidden transition-all duration-300">
+            <div class="absolute right-0 top-0 h-full w-72 glass-card border-l border-gray-800 p-4 flex flex-col">
+                <button id="closeMobileMenu" class="self-end p-2 rounded-full hover:bg-gray-800/50 mb-4">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+                
+                <div class="flex-1 space-y-4">
+                    <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg bg-purple-900/30 text-purple-100 glow-effect">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    
+                    <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                        <i data-lucide="calendar-days" class="w-5 h-5"></i>
+                        <span>Calendar</span>
+                    </button>
+                    
+                    <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                        <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+                        <span>Mood Tracker</span>
+                    </button>
+                    
+                    <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                        <span>Journal</span>
+                    </button>
+                    
+                    <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-gray-800/50 transition-slow text-gray-300 hover:text-white">
+                        <i data-lucide="timeline" class="w-5 h-5"></i>
+                        <span>Timeline</span>
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-800/50 transition-slow cursor-pointer mt-4">
+                    <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
+                        <i data-lucide="user" class="w-4 h-4"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">Alex Johnson</p>
+                        <p class="text-xs text-gray-400">Free Plan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top navigation -->
+            <div class="glass-card border-b border-gray-800 p-4 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <h2 class="text-xl font-semibold">Dashboard</h2>
+                    <div class="relative">
+                        <input type="text" placeholder="Search memories..." class="bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/50 w-64" />
+                        <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <button class="p-2 rounded-full hover:bg-gray-800/50 transition-slow">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <button class="p-2 rounded-full hover:bg-gray-800/50 transition-slow">
+                        <i data-lucide="settings" class="w-5 h-5"></i>
+                    </button>
+                    <button class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-gray-800/50 border border-gray-700 hover:bg-gray-800 transition-slow">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span class="text-sm">New</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Dashboard content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                <!-- Welcome card -->
+                <div class="glass-card rounded-xl p-6 glow-effect">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h3 class="text-2xl font-semibold">Welcome back, Alex</h3>
+                            <p class="text-gray-400 mt-1">"The present moment is filled with joy and happiness. If you are attentive, you will see it."</p>
+                        </div>
+                        <button class="mt-4 md:mt-0 flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-slow">
+                            <i data-lucide="pen-square" class="w-4 h-4"></i>
+                            <span>Start Journaling</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Journal entries -->
+                    <div class="glass-card rounded-xl p-5 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Journal Entries</p>
+                                <h3 class="text-2xl font-semibold mt-1">142</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                <i data-lucide="book-open-text" class="w-5 h-5 text-purple-400"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center space-x-1 text-sm text-green-400">
+                            <i data-lucide="trending-up" class="w-4 h-4"></i>
+                            <span>12% from last week</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Current streak -->
+                    <div class="glass-card rounded-xl p-5 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Current Streak</p>
+                                <h3 class="text-2xl font-semibold mt-1">7 days</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-pink-900/30 flex items-center justify-center">
+                                <i data-lucide="flame" class="w-5 h-5 text-pink-400"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center space-x-1 text-sm text-cyan-400">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            <span>Keep going!</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Mood average -->
+                    <div class="glass-card rounded-xl p-5 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-400 text-sm">Mood Average</p>
+                                <h3 class="text-2xl font-semibold mt-1">7.2</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-cyan-900/30 flex items-center justify-center">
+                                <i data-lucide="smile" class="w-5 h-5 text-cyan-400"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center space-x-1 text-sm text-purple-400">
+                            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                            <span>Better than last week</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent entries & mood tracker -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Recent entries -->
+                    <div class="glass-card rounded-xl p-5">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold">Recent Entries</h3>
+                            <button class="text-sm text-purple-400 hover:text-purple-300 transition-slow">View All</button>
+                        </div>
+                        
+                        <div class="mt-4 space-y-4">
+                            <div class="entry-block p-4 rounded-lg border border-gray-800 hover:border-purple-900/50 transition-slow cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-medium">Morning reflections</h4>
+                                    <span class="text-xs text-gray-400">Today, 8:30 AM</span>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-2 line-clamp-2">Started the day with gratitude. Feeling energized about the new project at work. Need to remember to take breaks throughout the day...</p>
+                                <div class="flex items-center space-x-2 mt-3">
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-purple-300">Reflection</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-cyan-300">Work</span>
+                                </div>
+                            </div>
+                            
+                            <div class="entry-block p-4 rounded-lg border border-gray-800 hover:border-purple-900/50 transition-slow cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-medium">Book insights</h4>
+                                    <span class="text-xs text-gray-400">Yesterday, 9:15 PM</span>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-2 line-clamp-2">Reading "Atomic Habits" and realizing how small changes compound over time. Need to implement this in my daily routine...</p>
+                                <div class="flex items-center space-x-2 mt-3">
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-pink-300">Reading</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-green-300">Growth</span>
+                                </div>
+                            </div>
+                            
+                            <div class="entry-block p-4 rounded-lg border border-gray-800 hover:border-purple-900/50 transition-slow cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-medium">Weekend plans</h4>
+                                    <span class="text-xs text-gray-400">2 days ago, 6:45 PM</span>
+                                </div>
+                                <p class="text-sm text-gray-400 mt-2 line-clamp-2">Planning to visit the new art exhibition downtown and maybe try that Italian restaurant Sarah recommended. Should invite Mark and...</p>
+                                <div class="flex items-center space-x-2 mt-3">
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-yellow-300">Plans</span>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-blue-300">Social</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mood tracker -->
+                    <div class="glass-card rounded-xl p-5">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold">Mood Tracker</h3>
+                            <button class="text-sm text-purple-400 hover:text-purple-300 transition-slow">View History</button>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-sm font-medium">This Week</h4>
+                                <div class="flex items-center space-x-1 text-xs text-gray-400">
+                                    <span>Better than last week</span>
+                                    <i data-lucide="arrow-up" class="w-3 h-3 text-green-400"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-end justify-between h-40">
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-happy w-8 rounded-t-full" style="height: 70%;"></div>
+                                    <span class="text-xs mt-2">Mon</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-calm w-8 rounded-t-full" style="height: 85%;"></div>
+                                    <span class="text-xs mt-2">Tue</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-happy w-8 rounded-t-full" style="height: 75%;"></div>
+                                    <span class="text-xs mt-2">Wed</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-neutral w-8 rounded-t-full" style="height: 50%;"></div>
+                                    <span class="text-xs mt-2">Thu</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-sad w-8 rounded-t-full" style="height: 30%;"></div>
+                                    <span class="text-xs mt-2">Fri</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-calm w-8 rounded-t-full" style="height: 60%;"></div>
+                                    <span class="text-xs mt-2">Sat</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="mood-happy w-8 rounded-t-full" style="height: 90%;"></div>
+                                    <span class="text-xs mt-2">Sun</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-5 gap-2">
+                                <button class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                    <div class="mood-happy w-8 h-8 rounded-full flex items-center justify-center">
+                                        <i data-lucide="laugh" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                    <span class="text-xs mt-1">Happy</span>
+                                </button>
+                                <button class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                    <div class="mood-calm w-8 h-8 rounded-full flex items-center justify-center">
+                                        <i data-lucide="smile" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                    <span class="text-xs mt-1">Calm</span>
+                                </button>
+                                <button class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                    <div class="mood-neutral w-8 h-8 rounded-full flex items-center justify-center">
+                                        <i data-lucide="meh" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                    <span class="text-xs mt-1">Neutral</span>
+                                </button>
+                                <button class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                    <div class="mood-sad w-8 h-8 rounded-full flex items-center justify-center">
+                                        <i data-lucide="frown" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                    <span class="text-xs mt-1">Sad</span>
+                                </button>
+                                <button class="flex flex-col items-center p-2 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                    <div class="mood-angry w-8 h-8 rounded-full flex items-center justify-center">
+                                        <i data-lucide="angry" class="w-4 h-4 text-white"></i>
+                                    </div>
+                                    <span class="text-xs mt-1">Angry</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendar view -->
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold">Calendar</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-1.5 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                            </button>
+                            <span class="text-sm font-medium">June 2023</span>
+                            <button class="p-1.5 rounded-lg hover:bg-gray-800/50 transition-slow">
+                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="grid grid-cols-7 gap-1 text-center text-sm text-gray-400 mb-2">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-7 gap-1">
+                            <!-- Previous month days -->
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">28</div>
+                            </div>
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">29</div>
+                            </div>
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">30</div>
+                            </div>
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">31</div>
+                            </div>
+                            
+                            <!-- Current month days -->
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">1</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">2</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">3</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">4</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">5</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg bg-purple-900/20 border border-purple-900/50 flex items-center justify-center glow-effect cursor-pointer relative">
+                                    6
+                                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-400"></div>
+                                </div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">7</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">8</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">9</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg bg-purple-900/20 border border-purple-900/50 flex items-center justify-center glow-effect cursor-pointer relative">
+                                    10
+                                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-400"></div>
+                                </div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">11</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">12</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">13</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">14</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg bg-purple-900/20 border border-purple-900/50 flex items-center justify-center glow-effect cursor-pointer relative">
+                                    15
+                                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-400"></div>
+                                </div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">16</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">17</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">18</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">19</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">20</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg bg-purple-900/20 border border-purple-900/50 flex items-center justify-center glow-effect cursor-pointer relative">
+                                    21
+                                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-400"></div>
+                                </div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">22</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">23</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">24</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">25</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">26</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg bg-purple-900/20 border border-purple-900/50 flex items-center justify-center glow-effect cursor-pointer relative">
+                                    27
+                                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-purple-400"></div>
+                                </div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">28</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">29</div>
+                            </div>
+                            <div class="aspect-square p-1">
+                                <div class="h-full rounded-lg flex items-center justify-center hover:bg-gray-800/50 transition-slow cursor-pointer">30</div>
+                            </div>
+                            
+                            <!-- Next month days -->
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">1</div>
+                            </div>
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">2</div>
+                            </div>
+                            <div class="aspect-square p-1 text-gray-600">
+                                <div class="h-full rounded-lg flex items-center justify-center">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Journal entry preview -->
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold">Journal Entry</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-sm text-gray-400 hover:text-white transition-slow flex items-center space-x-1">
+                                <i data-lucide="edit" class="w-4 h-4"></i>
+                                <span>Edit</span>
+                            </button>
+                            <button class="text-sm text-gray-400 hover:text-white transition-slow flex items-center space-x-1">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-xl font-medium">Morning Reflections</h4>
+                            <span class="text-sm text-gray-400">Today, 8:30 AM</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="entry-block p-4 rounded-lg bg-gray-900/30">
+                                <p>Woke up feeling refreshed today. The sunlight streaming through the window was particularly beautiful. Took a moment to appreciate the quiet before the day begins.</p>
+                            </div>
+                            
+                            <div class="entry-block p-4 rounded-lg bg-gray-900/30">
+                                <h5 class="font-medium text-purple-300 mb-2">Gratitude</h5>
+                                <ul class="list-disc list-inside space-y-1 text-gray-300">
+                                    <li>My health and ability to move my body</li>
+                                    <li>The coffee my partner made for me this morning</li>
+                                    <li>The peaceful quiet of early mornings</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="entry-block p-4 rounded-lg bg-gray-900/30">
+                                <h5 class="font-medium text-cyan-300 mb-2">Intentions for Today</h5>
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="w-4 h-4 rounded-full border-2 border-cyan-400 flex items-center justify-center">
+                                            <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+                                        </div>
+                                    </div>
+                                    <p>Stay present during meetings and really listen to colleagues</p>
+                                </div>
+                                <div class="flex items-start space-x-3 mt-2">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="w-4 h-4 rounded-full border-2 border-cyan-400 flex items-center justify-center">
+                                            <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+                                        </div>
+                                    </div>
+                                    <p>Take a proper lunch break away from my desk</p>
+                                </div>
+                                <div class="flex items-start space-x-3 mt-2">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <div class="w-4 h-4 rounded-full border-2 border-cyan-400"></div>
+                                    </div>
+                                    <p class="text-gray-400">Call mom in the evening</p>
+                                </div>
+                            </div>
+                            
+                            <div class="entry-block p-4 rounded-lg bg-gray-900/30">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="moon" class="w-4 h-4 text-purple-400"></i>
+                                    <h5 class="font-medium">Evening Reflection</h5>
+                                </div>
+                                <p class="mt-2 italic text-gray-300">Remember to reflect on how the day went before bed. What went well? What could be improved?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-purple-300">Reflection</span>
+                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-cyan-300">Morning</span>
+                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-green-300">Gratitude</span>
+                            <button class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-gray-400 hover:text-white transition-slow flex items-center space-x-1">
+                                <i data-lucide="plus" class="w-3 h-3"></i>
+                                <span>Add tag</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline view -->
+                <div class="glass-card rounded-xl p-5">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold">Timeline</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-sm text-gray-400 hover:text-white transition-slow">Day</button>
+                            <button class="text-sm text-purple-400 hover:text-purple-300 transition-slow">Week</button>
+                            <button class="text-sm text-gray-400 hover:text-white transition-slow">Month</button>
+                            <button class="text-sm text-gray-400 hover:text-white transition-slow">Year</button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="relative">
+                            <!-- Timeline line -->
+                            <div class="timeline-line absolute left-6 top-0 bottom-0"></div>
+                            
+                            <div class="space-y-8">
+                                <!-- Timeline item -->
+                                <div class="relative pl-12">
+                                    <div class="timeline-dot absolute left-5 top-1 rounded-full bg-purple-900/50"></div>
+                                    <div class="glass-card rounded-xl p-4 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium">Morning Walk</h4>
+                                            <span class="text-xs text-gray-400">Today, 7:30 AM</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">Took a refreshing walk in the park. Saw three different kinds of birds and the sunrise was spectacular.</p>
+                                        <div class="flex items-center space-x-2 mt-3">
+                                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-green-300">Outdoors</span>
+                                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-blue-300">Exercise</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline item -->
+                                <div class="relative pl-12">
+                                    <div class="timeline-dot absolute left-5 top-1 rounded-full bg-cyan-900/50"></div>
+                                    <div class="glass-card rounded-xl p-4 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium">Team Meeting</h4>
+                                            <span class="text-xs text-gray-400">Today, 10:00 AM</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">Product roadmap discussion. Need to follow up with design team about the new feature mockups.</p>
+                                        <div class="flex items-center space-x-2 mt-3">
+                                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-purple-300">Work</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline item -->
+                                <div class="relative pl-12">
+                                    <div class="timeline-dot absolute left-5 top-1 rounded-full bg-pink-900/50"></div>
+                                    <div class="glass-card rounded-xl p-4 hover:bg-gray-800/50 transition-slow cursor-pointer">
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="font-medium">Lunch with Sarah</h4>
+                                            <span class="text-xs text-gray-400">Today, 12:30 PM</span>
+                                        </div>
+                                        <p class="text-sm text-gray-400 mt-1">Tried the new sushi place downtown. Sarah had great news about her promotion - so happy for her!</p>
+                                        <div class="flex items-center space-x-2 mt-3">
+                                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-yellow-300">Social</span>
+                                            <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-red-300">Food</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Timeline date separator -->
+                                <div class="relative pl-12 pt-8">
+                                    <div class="absolute left-0 top-0 bottom-0 flex items-center">
+                                        <div class="text-xs text-gray-400 bg-gray-900 px-2 py-1 rounded-full">Yesterday</div>
+                                    </div>
+                                    
+                                    <!-- Yesterday's items -->
+                                    <div class="space-y-4">
+                                        <div class="relative pl-12">
+                                            <div class="timeline-dot absolute left-5 top-1 rounded-full bg-gray-700"></div>
+                                            <div class="glass-card rounded-xl p-4 hover:bg-gray-800/50 transition-slow cursor-pointer opacity-70">
+                                                <div class="flex items-center justify-between">
+                                                    <h4 class="font-medium">Evening Reading</h4>
+                                                    <span class="text-xs text-gray-400">Yesterday, 9:15 PM</span>
+                                                </div>
+                                                <p class="text-sm text-gray-400 mt-1">Continued reading "Atomic Habits". The concept of identity-based habits is really resonating with me.</p>
+                                                <div class="flex items-center space-x-2 mt-3">
+                                                    <span class="text-xs px-2 py-1 rounded-full bg-gray-800/50 text-pink-300">Reading</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating action button for mobile -->
+    <div class="md:hidden fixed bottom-6 right-6 z-10">
+        <button class="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center shadow-lg glow-effect floating">
+            <i data-lucide="plus" class="w-6 h-6 text-white"></i>
+        </button>
+    </div>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileSidebar.classList.remove('hidden');
+            setTimeout(() => {
+                mobileSidebar.classList.add('opacity-100');
+            }, 10);
+        });
+        
+        closeMobileMenu.addEventListener('click', () => {
+            mobileSidebar.classList.remove('opacity-100');
+            setTimeout(() => {
+                mobileSidebar.classList.add('hidden');
+            }, 300);
+        });
+        
+        // Simulate mood selection
+        const moodButtons = document.querySelectorAll('.mood-happy, .mood-calm, .mood-neutral, .mood-sad, .mood-angry');
+        moodButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove glow from all buttons
+                moodButtons.forEach(btn => {
+                    btn.parentElement.classList.remove('ring-2', 'ring-offset-2', 'ring-offset-gray-900', 'ring-purple-500');
+                });
+                
+                // Add glow to clicked button
+                this.parentElement.classList.add('ring-2', 'ring-offset-2', 'ring-offset-gray-900', 'ring-purple-500');
+                
+                // Show confirmation
+                const mood = this.querySelector('span').textContent;
+                alert(`Logged ${mood} mood for today!`);
+            });
+        });
+        
+        // Simulate calendar day click
+        const calendarDays = document.querySelectorAll('.aspect-square:not(.text-gray-600) > div');
+        calendarDays.forEach(day => {
+            day.addEventListener('click', function() {
+                // Remove selection from all days
+                calendarDays.forEach(d => {
+                    d.classList.remove('bg-purple-900/20', 'border-purple-900/50', 'glow-effect');
+                    const dot = d.querySelector('div');
+                    if (dot) dot.classList.remove('bg-purple-400');
+                });
+                
+                // Add selection to clicked day
+                this.classList.add('bg-purple-900/20', 'border-purple-900/50', 'glow-effect');
+                
+                // Show entries for selected day
+                console.log(`Showing entries for June ${this.textContent}`);
+            });
+        });
+        
+        // Simulate entry block click
+        const entryBlocks = document.querySelectorAll('.entry-block');
+        entryBlocks.forEach(block => {
+            block.addEventListener('click', function() {
+                // In a real app, this would navigate to the full entry
+                console.log('Opening journal entry:', this.querySelector('h4').textContent);
+            });
+        });
+    </script>
+</body>
+</html>

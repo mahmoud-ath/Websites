@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage Élégant - Votre aventure commence ici</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D9CEC',
+                        secondary: '#FF7F50',
+                        accent: '#F5DEB3',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .package-card:hover .package-overlay {
+            opacity: 1;
+        }
+        
+        .newsletter-popup {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Newsletter Popup -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg newsletter-popup p-6 z-50 hidden">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-4 md:mb-0">
+                <h3 class="text-xl font-bold text-primary">Recevez nos offres exclusives</h3>
+                <p class="text-gray-600">Abonnez-vous à notre newsletter pour des réductions spéciales et des inspirations de voyage</p>
+            </div>
+            <div class="flex w-full md:w-auto">
+                <input type="email" placeholder="Votre email" class="px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary w-full">
+                <button class="bg-primary text-white px-6 py-2 rounded-r-lg hover:bg-blue-600 transition">S'abonner</button>
+            </div>
+            <button onclick="closeNewsletter()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-primary flex items-center">
+                        <i class="fas fa-plane mr-2"></i>
+                        Voyage Élégant
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-primary font-medium hover:text-secondary">Accueil</a>
+                    <a href="#destinations" class="text-gray-700 hover:text-primary font-medium">Destinations</a>
+                    <a href="#packages" class="text-gray-700 hover:text-primary font-medium">Forfaits</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary font-medium">À propos</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-primary relative">
+                        <i class="fas fa-heart"></i>
+                        <span class="absolute -top-2 -right-2 bg-secondary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="text-gray-700 hover:text-primary">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div class="md:hidden hidden py-4" id="mobile-menu">
+                <a href="#" class="block py-2 text-primary font-medium">Accueil</a>
+                <a href="#destinations" class="block py-2 text-gray-700 hover:text-primary">Destinations</a>
+                <a href="#packages" class="block py-2 text-gray-700 hover:text-primary">Forfaits</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary">À propos</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-image min-h-screen flex items-center justify-center text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Votre aventure commence ici</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Découvrez des destinations extraordinaires avec des forfaits exclusifs</p>
+            <a href="#packages" class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">
+                Voir nos offres
+            </a>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section id="destinations" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Nos Destinations Populaires</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Destination 1 -->
+                <div class="destination-card bg-white rounded-xl overflow-hidden shadow-md transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3" alt="Bali, Indonésie" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <h3 class="text-white font-bold text-xl">Bali, Indonésie</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 mb-4">Détendez-vous sur des plages paradisiaques et découvrez une culture riche.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">À partir de 899€</span>
+                            <button class="text-secondary hover:text-primary">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Destination 2 -->
+                <div class="destination-card bg-white rounded-xl overflow-hidden shadow-md transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3" alt="Santorini, Grèce" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <h3 class="text-white font-bold text-xl">Santorini, Grèce</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 mb-4">Vues spectaculaires sur la mer Égée et couchers de soleil inoubliables.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">À partir de 749€</span>
+                            <button class="text-secondary hover:text-primary">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Destination 3 -->
+                <div class="destination-card bg-white rounded-xl overflow-hidden shadow-md transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3" alt="Kyoto, Japon" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <h3 class="text-white font-bold text-xl">Kyoto, Japon</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 mb-4">Temples anciens, jardins zen et traditions séculaires.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">À partir de 1299€</span>
+                            <button class="text-secondary hover:text-primary">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Destination 4 -->
+                <div class="destination-card bg-white rounded-xl overflow-hidden shadow-md transition duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512864084360-7c0c4d0a0845?ixlib=rb-4.0.3" alt="Marrakech, Maroc" class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                            <h3 class="text-white font-bold text-xl">Marrakech, Maroc</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-gray-600 mb-4">Médinas animées, riads luxueux et désert mystérieux.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">À partir de 599€</span>
+                            <button class="text-secondary hover:text-primary">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Explorez par catégorie</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:bg-primary hover:text-white transition duration-300">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Plage 🏖️</h3>
+                    <p class="text-sm mt-2">Soleil, sable et mer</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:bg-primary hover:text-white transition duration-300">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Aventure 🏞️</h3>
+                    <p class="text-sm mt-2">Randonnée et exploration</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:bg-primary hover:text-white transition duration-300">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Luxe ✨</h3>
+                    <p class="text-sm mt-2">Expériences haut de gamme</p>
+                </a>
+                
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:bg-primary hover:text-white transition duration-300">
+                    <div class="text-4xl mb-4">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Week-end 🏙️</h3>
+                    <p class="text-sm mt-2">Échappées urbaines</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Nos Forfaits de Voyage</h2>
+            
+            <div class="flex flex-wrap justify-center mb-8">
+                <button class="px-4 py-2 bg-primary text-white rounded-l-lg">Tous</button>
+                <button class="px-4 py-2 bg-white border-t border-b border-gray-200">Europe</button>
+                <button class="px-4 py-2 bg-white border-t border-b border-gray-200">Asie</button>
+                <button class="px-4 py-2 bg-white border-t border-b border-gray-200">Amériques</button>
+                <button class="px-4 py-2 bg-white border-t border-b border-gray-200 rounded-r-lg">Afrique</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="package-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3" alt="Voyage au Japon" class="w-full h-full object-cover">
+                        <div class="absolute top-2 right-2 bg-secondary text-white px-2 py-1 rounded text-xs font-bold">
+                            Offre spéciale
+                        </div>
+                        <div class="package-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition duration-300">
+                            <button class="bg-primary hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition">
+                                Voir détails
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Découverte du Japon</h3>
+                            <span class="text-primary font-bold">1299€</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            <span>10 jours</span>
+                            <i class="fas fa-map-marker-alt ml-3 mr-1"></i>
+                            <span>Tokyo, Kyoto, Osaka</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Explorez les villes emblématiques du Japon avec ce circuit complet incluant hébergement et visites guidées.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="ml-1 text-gray-700">4.8 (24 avis)</span>
+                            </div>
+                            <button class="bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Package 2 -->
+                <div class="package-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3" alt="Bali paradisiaque" class="w-full h-full object-cover">
+                        <div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                            Top vente
+                        </div>
+                        <div class="package-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition duration-300">
+                            <button class="bg-primary hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition">
+                                Voir détails
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Bali Paradisiaque</h3>
+                            <span class="text-primary font-bold">899€</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            <span>7 jours</span>
+                            <i class="fas fa-map-marker-alt ml-3 mr-1"></i>
+                            <span>Ubud, Seminyak, Uluwatu</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Détente absolue dans les plus beaux resorts de Bali avec spa inclus et excursions optionnelles.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="ml-1 text-gray-700">4.9 (36 avis)</span>
+                            </div>
+                            <button class="bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Package 3 -->
+                <div class="package-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3" alt="Santorini romantique" class="w-full h-full object-cover">
+                        <div class="package-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition duration-300">
+                            <button class="bg-primary hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition">
+                                Voir détails
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-lg">Santorini Romantique</h3>
+                            <span class="text-primary font-bold">749€</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <i class="fas fa-calendar-alt mr-1"></i>
+                            <span>5 jours</span>
+                            <i class="fas fa-map-marker-alt ml-3 mr-1"></i>
+                            <span>Oia, Fira, Kamari</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Séjour en amoureux avec vue sur le coucher de soleil, dîner privé et chambre avec jacuzzi.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="ml-1 text-gray-700">4.7 (18 avis)</span>
+                            </div>
+                            <button class="bg-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                                Réserver
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="border-2 border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary hover:text-white transition duration-300">
+                    Voir tous les forfaits
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Avis de nos clients</h2>
+            
+            <div class="testimonial-slider relative">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl p-6 shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sophie Martin" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Sophie Martin</h4>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Notre voyage à Bali organisé par Voyage Élégant était tout simplement parfait. Tout était bien planifié et nous avons pu profiter pleinement de nos vacances sans aucun stress."</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl p-6 shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thomas Lefèvre" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Thomas Lefèvre</h4>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"L'agence a su nous conseiller le circuit idéal pour notre première fois au Japon. Les guides étaient excellents et les hôtels bien situés. Je recommande vivement !"</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-gray-50 rounded-xl p-6 shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Camille Dubois" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Camille Dubois</h4>
+                                <div class="flex">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Séjour romantique à Santorini qui a dépassé nos attentes. La chambre avec vue sur la caldeira était magnifique et le service impeccable. Merci pour cette organisation sans faille."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+<img src="https://images.unsplash.com/photo-1523908511403-7fc7b25592f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Notre équipe" class="rounded-xl shadow-lg w-full">                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">Qui sommes-nous</h2>
+                    <p class="text-gray-600 mb-4">Fondée en 2010, Voyage Élégant est une agence de voyage spécialisée dans la création d'expériences uniques et mémorables à travers le monde.</p>
+                    <p class="text-gray-600 mb-6">Notre mission est de rendre les voyages accessibles tout en offrant un service personnalisé et de qualité. Nous croyons que chaque voyage devrait être une aventure extraordinaire, adaptée à vos rêves et à votre budget.</p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-3">
+                                <i class="fas fa-globe text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">50+ destinations</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-3">
+                                <i class="fas fa-smile text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">5000+ clients satisfaits</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-3">
+                                <i class="fas fa-award text-primary text-xl"></i>
+                            </div>
+                            <span class="font-medium">Prix d'excellence 2023</span>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                        Rencontrer notre équipe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Conseils de voyage</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-4.0.3" alt="Voyager léger" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-secondary text-sm font-medium">Astuces</span>
+                        <h3 class="font-bold text-xl my-2">Comment voyager léger sans rien oublier</h3>
+                        <p class="text-gray-600 mb-4">Découvrez nos conseils pour optimiser votre valise et voyager sans encombre.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500 text-sm">15 juin 2023</span>
+                            <a href="#" class="text-primary font-medium hover:underline">Lire l'article</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Article 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-4.0.3" alt="Top destinations 2025" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-secondary text-sm font-medium">Inspiration</span>
+                        <h3 class="font-bold text-xl my-2">Top 10 des destinations à visiter en 2025</h3>
+                        <p class="text-gray-600 mb-4">Nos experts partagent leurs prédictions pour les prochaines tendances voyage.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500 text-sm">2 juin 2023</span>
+                            <a href="#" class="text-primary font-medium hover:underline">Lire l'article</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Article 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1433838552652-f9a46b332c40?ixlib=rb-4.0.3" alt="Voyager responsable" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-secondary text-sm font-medium">Éthique</span>
+                        <h3 class="font-bold text-xl my-2">Guide du voyageur responsable en 2023</h3>
+                        <p class="text-gray-600 mb-4">Comment réduire son impact environnemental tout en explorant le monde.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500 text-sm">20 mai 2023</span>
+                            <a href="#" class="text-primary font-medium hover:underline">Lire l'article</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="border-2 border-primary text-primary font-bold py-3 px-8 rounded-full hover:bg-primary hover:text-white transition duration-300">
+                    Voir tous les articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Suivez-nous sur Instagram</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">@voyageelegant - Partagez vos photos avec #voyageelegant pour apparaître ici</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1512864084360-7c0c4d0a0845?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="instagram-post block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-4.0.3" alt="Instagram post" class="w-full h-40 object-cover">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Contactez-nous</h2>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Nom complet</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2">Sujet</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                        </div>
+                        <button type="submit" class="bg-primary hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 w-full">
+                            Envoyer le message
+                        </button>
+                    </form>
+                    
+                    <div class="mt-8">
+                        <h3 class="font-bold text-xl mb-4">FAQ</h3>
+                        <div class="space-y-3">
+                            <div class="border-b border-gray-200 pb-3">
+                                <button class="flex justify-between items-center w-full text-left font-medium">
+                                    <span>Quelle est la politique d'annulation ?</span>
+                                    <i class="fas fa-chevron-down text-sm"></i>
+                                </button>
+                                <div class="hidden mt-2 text-gray-600">
+                                    Vous pouvez annuler jusqu'à 30 jours avant le départ pour un remboursement complet. Des frais peuvent s'appliquer pour les annulations plus tardives.
+                                </div>
+                            </div>
+                            <div class="border-b border-gray-200 pb-3">
+                                <button class="flex justify-between items-center w-full text-left font-medium">
+                                    <span>Les vols sont-ils inclus dans les forfaits ?</span>
+                                    <i class="fas fa-chevron-down text-sm"></i>
+                                </button>
+                                <div class="hidden mt-2 text-gray-600">
+                                    Certains forfaits incluent les vols, d'autres non. Cette information est toujours précisée dans les détails de chaque offre.
+                                </div>
+                            </div>
+                            <div class="border-b border-gray-200 pb-3">
+                                <button class="flex justify-between items-center w-full text-left font-medium">
+                                    <span>Puis-je personnaliser mon voyage ?</span>
+                                    <i class="fas fa-chevron-down text-sm"></i>
+                                </button>
+                                <div class="hidden mt-2 text-gray-600">
+                                    Absolument ! Nos conseillers peuvent adapter n'importe quel forfait à vos besoins ou créer un voyage sur mesure.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-gray-50 p-6 rounded-xl h-full">
+                        <h3 class="font-bold text-xl mb-4">Nos coordonnées</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Adresse</h4>
+                                    <p class="text-gray-600">123 Avenue des Champs-Élysées, 75008 Paris, France</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                                    <i class="fas fa-phone-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Téléphone</h4>
+                                    <p class="text-gray-600">+33 1 23 45 67 89</p>
+                                    <p class="text-gray-600">Lundi au vendredi, 9h-18h</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-gray-600">contact@voyageelegant.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
+                                    <i class="fab fa-whatsapp text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">WhatsApp</h4>
+                                    <p class="text-gray-600 mb-2">+33 6 12 34 56 78</p>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition">
+                                        <i class="fab fa-whatsapp mr-2"></i> Nous écrire
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 h-64 rounded-xl overflow-hidden">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.2922926156380203!3d48.85837007928746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1623258136845!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Prêt pour votre prochaine aventure ?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Abonnez-vous à notre newsletter pour recevoir nos offres exclusives et des inspirations de voyage.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center max-w-xl mx-auto">
+                <input type="email" placeholder="Votre adresse email" class="px-4 py-3 rounded-l-lg sm:rounded-r-none rounded-r-lg sm:w-2/3 text-gray-800 focus:outline-none">
+                <button class="bg-secondary hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-r-lg sm:rounded-l-none rounded-l-lg mt-2 sm:mt-0 sm:w-1/3 transition">
+                    S'abonner
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-plane mr-2"></i>
+                        Voyage Élégant
+                    </h3>
+                    <p class="text-gray-400 mb-4">Votre agence de voyage premium pour des expériences inoubliables à travers le monde.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                        <li><a href="#destinations" class="text-gray-400 hover:text-white transition">Destinations</a></li>
+                        <li><a href="#packages" class="text-gray-400 hover:text-white transition">Forfaits</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Conditions générales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Politique d'annulation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Aide</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-sm"></i>
+                            <span>123 Avenue des Champs-Élysées, 75008 Paris</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-sm"></i>
+                            <span>+33 1 23 45 67 89</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-sm"></i>
+                            <span>contact@voyageelegant.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Voyage Élégant. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Mentions légales</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Politique de cookies</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // FAQ accordion
+        const faqButtons = document.querySelectorAll('#contact button');
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                answer.classList.toggle('hidden');
+                
+                const icon = button.querySelector('i');
+                if (answer.classList.contains('hidden')) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // Show newsletter popup after delay
+        setTimeout(() => {
+            document.querySelector('.newsletter-popup').classList.remove('hidden');
+        }, 5000);
+        
+        function closeNewsletter() {
+            document.querySelector('.newsletter-popup').classList.add('hidden');
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
