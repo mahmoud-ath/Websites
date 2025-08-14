@@ -50,7 +50,6 @@ This portfolio website serves as a showcase for web development projects, featur
 
 ## 📸 Screenshots
 ![Project Showcase](Image/DevShowcase%20website.png)
-![Project Details](Projects_site/MarkusPub/images/1_tech.jpg)
 
 ## 🛠️ Technical Details
 
