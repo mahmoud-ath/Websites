@@ -6,7 +6,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/mahmoud-ath/Websites)](https://github.com/mahmoud-ath/Websites/issues)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-![Portfolio Banner](Image/BrandFlux.jpeg)
+![Portfolio Banner](Image/devshowcase.jpeg)
 
 ## 📑 Table of Contents
 - [About](#about)
@@ -49,8 +49,8 @@ This portfolio website serves as a showcase for web development projects, featur
 - 🔍 SEO-friendly structure
 
 ## 📸 Screenshots
-![Project Showcase](Projects_site/BrandFlux/img/screencapture-127-0-0-1-8000-2025-07-30-01_01_18.png)
-![Project Details](Projects_site/BrandFlux/img/E-Commerce%20Redesign.jpg)
+![Project Showcase](Image/DevShowcase%20website.png)
+![Project Details](Projects_site/MarkusPub/images/1_tech.jpg)
 
 ## 🛠️ Technical Details
 
@@ -93,12 +93,7 @@ cd Websites
 
 3. Open index.html in your browser or use a local server:
 \`\`\`bash
-# Using Python
-python -m http.server 8000
 
-# Using Node.js
-npx serve
-\`\`\`
 
 ## 🎮 Usage
 1. Browse through projects using the carousel navigation
@@ -141,14 +136,30 @@ Mahmoud Ath - [GitHub Profile](https://github.com/mahmoud-ath)
 Project Link: [https://github.com/mahmoud-ath/Websites](https://github.com/mahmoud-ath/Websites)
 
 ## 🗺️ Roadmap
-- [ ] Add dark/light theme toggle
-- [ ] Implement search functionality
-- [ ] Add project filtering options
-- [ ] Integrate blog section
-- [ ] Add multilingual support
-- [ ] Implement contact form
-- [ ] Add project analytics
-- [ ] Enhance accessibility features
+### Phase 1: Essential Website Structure
+- [ ] Setup basic project structure
+  - [ ] HTML foundation
+  - [ ] Core CSS styling
+  - [ ] Basic JavaScript functionality
+- [ ] Implement responsive design
+  - [ ] Mobile-first approach
+  - [ ] Breakpoints for different devices
+- [ ] Create carousel component
+  - [ ] Basic sliding functionality
+  - [ ] Touch support
+  - [ ] Navigation controls
+
+### Phase 2: Project Integration
+- [ ] Add MarkusPub website
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/MarkusPub/index.html)
+- [ ] Add BrandFlux website
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/BrandFlux/index.html)
+- [ ] Add CoachPro website
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/coachPro.html)
+- [ ] Add StockMasterPro website
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/StockMasterPro.html)
+- [ ] Add VoyageElegant website
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/voyage_elegant.html)
 
 ---
 
