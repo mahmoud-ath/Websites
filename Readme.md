@@ -81,18 +81,16 @@ The project follows a clean, modular architecture with separate concerns for:
 
 ### Local Setup
 1. Clone the repository:
-\`\`\`bash
+```bash
 git clone https://github.com/mahmoud-ath/Websites.git
-\`\`\`
+```
 
 2. Navigate to project directory:
-\`\`\`bash
+```bash
 cd Websites
-\`\`\`
+```
 
-3. Open index.html in your browser or use a local server:
-\`\`\`bash
-
+3. Open index.html in your browser or use a local server
 
 ## 🎮 Usage
 1. Browse through projects using the carousel navigation
@@ -154,11 +152,11 @@ Project Link: [https://github.com/mahmoud-ath/Websites](https://github.com/mahmo
 - [ ] Add BrandFlux website
   - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/BrandFlux/index.html)
 - [ ] Add CoachPro website
-  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/coachPro.html)
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/coachPro/coachPro.html)
 - [ ] Add StockMasterPro website
-  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/StockMasterPro.html)
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/StockMasterPro/StockMasterPro.html)
 - [ ] Add VoyageElegant website
-  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/voyage_elegant.html)
+  - [View Demo](https://mahmoud-ath.github.io/Websites/Projects_site/voyage_elegant/voyage_elegant.html)
 
 ---
 
