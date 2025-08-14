@@ -1,0 +1,42 @@
+body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+        .digital-font {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(55, 65, 81, 0.5);
+        }
+        .glow-text {
+            text-shadow: 0 0 8px rgba(0, 200, 255, 0.7);
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+        }
+        .carousel-container {
+            scroll-behavior: smooth;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .nav-dot.active {
+            background-color: #00c8ff;
+            transform: scale(1.2);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }

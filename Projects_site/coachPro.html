@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional coaching services by Razika Hmallaoui - overcome depression, achieve weight loss, and improve health through simple, effective programs.">
+    <title>Coach Pro | Life Transformation Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #D1A054;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .whatsapp-float {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .success-message {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-gray-800">Coach Pro</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">About</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="#program" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">Program</a>
+                    <a href="#testimonials" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">Testimonials</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-amber-600 px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-amber-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">About</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">Services</a>
+                <a href="#program" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">Program</a>
+                <a href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-amber-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-b from-green-50 to-white section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-6">
+                        Transform Your Life With <span class="text-amber-600">Simple, Effective</span> Coaching
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8">
+                        I'm Coach Pro, specializing in helping you overcome depression, achieve sustainable weight loss, and improve your health through my proven, easy-to-follow methods.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contact" class="btn-primary bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg text-center">
+                            Book Your Session
+                        </a>
+                        <a href="#program" class="btn-primary border-2 border-amber-600 text-amber-600 hover:bg-amber-50 font-semibold py-3 px-8 rounded-lg text-center">
+                            Learn About My Program
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                            <!-- Placeholder for coach's photo -->
+                            <div class="w-full h-full bg-gradient-to-br from-amber-100 to-green-100 flex items-center justify-center">
+                                <span class="text-4xl text-amber-600">
+                                    <i class="fas fa-user-tie"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-lg shadow-md">
+                            <div class="flex items-center">
+                                <div class="bg-green-100 p-2 rounded-full mr-3">
+                                    <i class="fas fa-check text-green-600"></i>
+                                </div>
+                                <span class="text-sm font-medium text-gray-700">500+ Clients Helped</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">About Coach Pro</h2>
+                <div class="w-20 h-1 bg-amber-600 mx-auto"></div>
+            </div>
+            
+            <div class="md:flex items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
+                    <div class="w-64 h-64 rounded-lg overflow-hidden shadow-lg">
+                        <!-- Another placeholder image -->
+                        <div class="w-full h-full bg-gradient-to-br from-green-100 to-amber-100 flex items-center justify-center">
+                            <span class="text-5xl text-amber-600">
+                                <i class="fas fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">My Story & Philosophy</h3>
+                    <p class="text-gray-600 mb-4">
+                        After years of personal struggle and professional training, I developed a unique coaching approach that combines psychological insight with practical, actionable steps. My journey taught me that real transformation comes from simplicity, not complexity.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        I believe everyone has the power to change their life when given the right tools and support. My method focuses on small, sustainable changes that create big results over time - because lasting transformation happens through consistency, not intensity.
+                    </p>
+                    <p class="text-gray-600">
+                        What makes my approach different is its accessibility. I've distilled complex psychological and physiological principles into simple, easy-to-implement strategies that work for real people with busy lives.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-green-50 section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">My Coaching Services</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Specialized programs designed to address your specific needs with proven results</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-brain text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Overcoming Depression</h3>
+                    <p class="text-gray-600">
+                        Break free from negative thought patterns and rediscover joy through my simple, neuroscience-based techniques that rewire your brain for happiness.
+                    </p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-weight text-2xl text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Sustainable Weight Loss</h3>
+                    <p class="text-gray-600">
+                        Lose weight without restrictive diets through my metabolism-boosting approach that makes healthy eating effortless and enjoyable.
+                    </p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heartbeat text-2xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Health Improvement</h3>
+                    <p class="text-gray-600">
+                        Enhance intimacy and wellbeing through natural methods that address both physical and psychological aspects of health.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Steps -->
+    <section id="program" class="py-16 bg-white section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">My Simple 4-Step Program</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Achieve lasting results through this easy-to-follow process</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-amber-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">1</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Initial Assessment</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        We'll start with a comprehensive evaluation of your current situation, challenges, and goals to create a tailored approach.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-amber-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">2</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Personalized Plan</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        You'll receive a customized, easy-to-follow roadmap with clear steps designed specifically for your needs and lifestyle.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-amber-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">3</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Guided Sessions</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Through regular coaching sessions, we'll implement your plan with my support, making adjustments as needed for optimal results.
+                    </p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-amber-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-600 text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4">4</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Ongoing Support</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Even after achieving your goals, I provide follow-up support to ensure you maintain your progress long-term.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="btn-primary inline-block bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-8 rounded-lg">
+                    Start Your Transformation Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-green-50 section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Success Stories</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Hear from people who transformed their lives with my coaching</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Sarah J.</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "After years of struggling with depression, Coach Pro's simple techniques helped me find joy again. Her approach is so easy to follow yet incredibly effective. I'm forever grateful!"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Michael T.</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "I lost 25kg with Coach Pro's program and kept it off for 2 years now. No crazy diets, just simple changes that became habits. This is the only program that ever worked for me."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden bg-green-100 flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-green-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Amina & Karim</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Coach Pro transformed our marriage. Her approach to intimacy coaching brought us closer than we've ever been. The exercises were simple but made all the difference."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Let's Start Your Journey</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Contact me today to schedule your first session or ask any questions</p>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="md:flex">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Get In Touch</h3>
+                    <p class="text-gray-600 mb-6">
+                        Ready to transform your life? Fill out the form or contact me directly via WhatsApp. I typically respond within 24 hours.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Email</p>
+                                <p class="text-gray-700 font-medium">contact@coachrazika.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Phone/WhatsApp</p>
+                                <p class="text-gray-700 font-medium">+123 456 7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Working Hours</p>
+                                <p class="text-gray-700 font-medium">Mon-Fri: 9AM - 6PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form id="contact-form" class="bg-green-50 p-6 rounded-lg shadow-sm">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact" class="block text-gray-700 font-medium mb-2">Email or Phone</label>
+                            <input type="text" id="contact" name="contact" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent" required></textarea>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service Interested In</label>
+                            <select id="service" name="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                                <option value="">Select a service</option>
+                                <option value="depression">Overcoming Depression</option>
+                                <option value="weight-loss">Weight Loss</option>
+                                <option value="health">Health Improvement</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-4 rounded-lg">
+                            Send Message
+                        </button>
+                        
+                        <div id="success-message" class="success-message mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                            Thank you! Your message has been sent. I'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-xl font-bold">Coach Pro</span>
+                    <p class="mt-2 text-gray-400">Simple, effective coaching for lasting transformation.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
+                            <li><a href="#program" class="text-gray-400 hover:text-white">Program</a></li>
+                            <li><a href="#testimonials" class="text-gray-400 hover:text-white">Testimonials</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Services</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#services" class="text-gray-400 hover:text-white">Depression Coaching</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white">Weight Loss</a></li>
+                            <li><a href="#services" class="text-gray-400 hover:text-white">Health</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-semibold uppercase tracking-wider mb-4">Connect</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Coach Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-float fixed bottom-8 right-8 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-lg hover:bg-green-600 transition-colors duration-300 z-40">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-24 right-8 bg-amber-600 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg hover:bg-amber-700 transition-colors duration-300 opacity-0 invisible z-40">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send the form data to a server here
+            // For this example, we'll just show the success message
+            
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 5000);
+        });
+
+        // Scroll to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for section animations
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Sticky navigation background change on scroll
+        const nav = document.querySelector('nav');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
